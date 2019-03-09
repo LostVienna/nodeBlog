@@ -1,0 +1,250 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>技术博客</title>
+<link href="/public/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+<link href="/public/css/style.css" type="text/css" rel="stylesheet">
+<link type="text/css" href="/public/css/nprogress.css" rel="stylesheet">
+<link rel="apple-touch-icon-precomposed" href="/public/images/icon/icon.png">
+<link rel="shortcut icon" href="/public/images/icon/favicon.ico">
+<link href="/public/css/login-register.css" rel="stylesheet" />
+<meta name="Keywords" content="" />
+<meta name="description" content="" />
+
+</head>
+
+<body>
+<section class="container user-select">
+     <!-- 注册窗口 -->
+    <div id="register" class="modal fade" tabindex="-1">
+         <div class="modal-dialog">
+             <div class="modal-content">
+                 <div class="modal-body">
+                     <button class="close" data-dismiss="modal">
+                         <span>&times;</span>
+                     </button>
+                 </div>
+                 <div class="modal-title">
+                     <h1 class="text-center">注册</h1>
+                 </div>
+                 <div class="modal-body">
+                     <form id="register_form" class="form-group" action="/register" method="post">
+                             <div class="form-group">
+                                 <label for="">用户名</label>
+                                 <input class="form-control" type="text" placeholder="6-15位字母或数字" name="userName">
+                            </div>
+                            <div class="form-group">
+                                <label for="">密码</label>
+                                <input class="form-control" type="password" placeholder="至少6位字母或数字" name="password">
+                             </div>
+                             <div class="form-group">
+                                 <label for="">再次输入密码</label>
+                                 <input class="form-control" type="password" placeholder="至少6位字母或数字" name="passwordAgain">
+                             </div>
+                             <div class="form-group">
+                                 <label for="">邮箱</label>
+                                 <input class="form-control" type="email" placeholder="例如:123@123.com" name="email">
+                             </div>
+                             <div class="text-right">
+                                 <button class="btn btn-primary" type="submit">注册</button>
+                                 <button class="btn btn-danger" data-dismiss="modal">取消</button>
+                             </div>
+                             <a href="" data-toggle="modal" data-dismiss="modal" data-target="#login">已有账号？点我登录</a>
+                      </form>
+                  </div>
+              </div>
+          </div>
+    </div>
+      <!-- 登录窗口 -->
+    <div id="login" class="modal fade">
+          <div class="modal-dialog">
+              <div class="modal-content">
+                  <div class="modal-body">
+                      <button class="close" data-dismiss="modal">
+                          <span>&times;</span>
+                      </button>
+                  </div>
+                  <div class="modal-title">
+                      <h1 class="text-center">登录</h1>
+                  </div>
+                  <div class="modal-body">
+                      <form id="login_form" class="form-group" action="/login" method="post">
+                              <div class="form-group">
+                                  <label for="">用户名</label>
+                                  <input class="form-control" type="text" placeholder="" name="userName">
+                              </div>
+                              <div class="form-group">
+                                  <label for="">密码</label>
+                                  <input class="form-control" type="password" placeholder="" name="password">
+                            </div>
+                            <div class="text-right">
+                                <button class="btn btn-primary" type="submit">登录</button>
+                                <button class="btn btn-danger" data-dismiss="modal">取消</button>
+                             </div>
+                             <a href="" data-toggle="modal" data-dismiss="modal" data-target="#register">还没有账号？点我注册</a>
+                     </form>
+                 </div>
+             </div>
+         </div>
+    </div>
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container-fluid">  <!-- navbar-fixed-bottom固定底部 顶部top-->
+        <div class="navbar-header">
+          <a href="#" class="navbar-brand">Blog</a>
+        </div>
+        <form action="" class="navbar-form navbar-left">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="南国四季飘雪">
+            <button type="submit" class="btn btn-default">搜索</button>
+          </div>
+        </form>
+        <ul class="nav navbar-nav navbar-right">
+          {{if user}}
+            <li>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                {{user.userName}}个人信息
+                <span class="caret"></span>
+                <ul class="dropdown-menu">
+                  <li><a href="#" role="menuitem">个人主页</a></li>
+                  <li><a href="#" role="menuitem">设置</a></li>
+                  <li><a href="/logout" role="menuitem">退出</a></li>
+                </ul>
+              </a>
+            </li>
+            <li><a href="#" >发起</a></li>          
+          {{else}}
+            <li><a data-toggle="modal" data-target="#login" href=""> 登录</a></li>
+            <li><a class="zhuce" data-toggle="modal" data-target="#register" href=""> 注册</a></li>
+          {{/if}}
+        </ul>
+      </div>
+    </nav>
+  <!--/超小屏幕可见-->
+  <div class="content-wrap">
+    <div class="content">
+      <div class="content-block hot-content hidden-xs">
+        <h2 class="title"><strong>本周热门排行</strong></h2>
+        <ul>
+          <li class="large"><a href="content.html" target="_blank"><img src="/public/images/img3.jpg" alt="">
+            <h3> 欢迎来到个人技术博客技术博客 </h3>
+            </a></li>
+          <li><a href="content.html" target="_blank"><img src="/public/images/logo.jpg" alt="">
+            <h3> 欢迎来到个人技术博客技术博客,在这里可以看到网站前端和后端的技术等 </h3>
+            </a></li>
+          <li><a href="content.html" target="_blank"><img src="/public/images/img2.jpg" alt="">
+            <h3> 欢迎来到个人技术博客技术博客,在这里可以看到网站前端和后端的技术等 </h3>
+            </a></li>
+          <li><a href="content.html" target="_blank"><img src="/public/images/img1.jpg" alt="">
+            <h3> 欢迎来到个人技术博客技术博客，在这里可以看到网站前端和后端的技术等 </h3>
+            </a></li>
+          <li><a href="content.html" target="_blank"><img src="/public/images/logo.jpg" alt="">
+            <h3> 欢迎来到个人技术博客技术博客，在这里可以看到网站前端和后端的技术等 </h3>
+            </a></li>
+        </ul>
+      </div>
+      <div class="content-block new-content">
+        <div class="row">
+          <div class="news-list">
+            <div class="news-img col-xs-5 col-sm-5 col-md-4"> 
+              <a target="_blank" href="">
+                <img src="/public/images/logo.jpg" alt=""> </a> 
+              </div>
+            <div class="news-info col-xs-7 col-sm-7 col-md-8">
+              <dl>
+                <dt> 
+                  <a href="" target="_blank" > 个人技术博客技术博客正式上线！ </a> 
+                </dt>
+                <dd>
+                  <span class="name">
+                    <a href="" title="由 个人技术博客 发布" rel="author">个人技术博客</a>
+                  </span> 
+                  <span class="identity"></span> 
+                  <span class="time"> 2015-10-19 </span></dd>
+                <dd class="text">欢迎来到个人技术博客技术博客，在这里可以看到网站前端和后端的技术，还有CMS内容管理系统，包括但不限于这些还有CMS内容管理系统，包括但不限于这些。</dd>
+              </dl>
+              <div class="news_bot col-sm-7 col-md-8"> 
+                <span class="tags visible-lg visible-md"> 
+                  <a href="">本站</a> 
+                  <a href="">个人技术博客</a> 
+                </span> 
+                <span class="look"> 共 <strong>2126</strong> 人围观，发现 <strong> 12 </strong> 个不明物体 
+                </span> 
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="quotes" style="margin-top:15px">
+          <span class="disabled">首页</span>
+          <span class="disabled">上一页</span>
+          <span class="current">1</span>
+          <a href="">2</a>
+          <a href="">3</a>
+          <a href="">4</a>
+          <a href="">5</a>
+          <a href="">下一页</a>
+          <a href="">尾页</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--/内容-->
+  <aside class="sidebar visible-lg">
+  </aside>
+  <!--/右侧>992px显示-->
+</section>
+
+<script src="/public/js/jquery-3.2.1.min.js" type="text/javascript"></script> 
+<script src="/public/js/nprogress.js" type="text/javascript" ></script> 
+<script src="/public/js/bootstrap.min.js" type="text/javascript"></script> 
+<script src="/public/js/login-register.js" type="text/javascript"></script>
+<script>
+  $(function () {
+    $("#register_form").on('submit', function (e) {
+      e.preventDefault() //阻止默认提交行为
+      var formData = $(this).serialize()
+      $.ajax({
+        url: '/register',
+        type: 'post',
+        data: formData,
+        dataType: 'json',
+        success: function (data) {
+          var err_code = data.err_code
+          if (err_code === 1) {
+            //客户端异步请求，服务端不能重定向，交给客户端处理
+            window.location.href = '/'
+          } else if (err_code === 0) {
+            alert('邮箱或昵称已存在')
+          } else if (err_code === 500) {
+            alert('服务器繁忙，请稍后重试')
+          }
+        }
+      })
+    })
+
+    $('#login_form').on('submit', function (e) {
+      e.preventDefault();
+      var formData = $(this).serialize()
+      $.ajax({
+        url: '/login',
+        type: 'post',
+        data: formData,
+        dataType: 'json',
+        success: function (data) {
+          var err_code = data.err_code
+          if (err_code === 1) {
+            window.location.href = '/'
+          } else if (err_code === 0){
+            return alert('邮箱或昵称错误')
+          } else if (err_code === 500) {
+            alert('服务器繁忙，请稍后重试')
+          }
+        }
+      })
+    })
+  })
+</script>
+</body>
+</html>
